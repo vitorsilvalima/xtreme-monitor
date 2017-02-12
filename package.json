@@ -1,0 +1,24 @@
+{
+  "name": "electron-monitor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szwacz/electron-boilerplate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szwacz/electron-boilerplate/issues"
+  },
+  "homepage": "https://github.com/szwacz/electron-boilerplate#readme",
+  "dependencies": {
+    "cpu-usage": "^0.1.0",
+    "systeminformation": "^3.16.0"
+  }
+}

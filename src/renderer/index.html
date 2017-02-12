@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="monitorApp">
+    <head>
+        <meta charset="UTF-8">
+        <title>Hello World!</title>
+
+        <!-- PatternFly Styles -->
+        <!-- Note: No other CSS files are needed regardless of what other JS packages located in patternfly/components that you decide to pull in -->
+        <link rel="stylesheet" href="./../../bower_components/patternfly/dist/css/patternfly.min.css">
+        <link rel="stylesheet" href="./../../bower_components/patternfly/dist/css/patternfly-additions.min.css">
+
+        <!-- Angular-PatternFly Styles -->
+        <link rel="stylesheet" href="./../../bower_components/angular-patternfly/dist/styles/angular-patternfly.min.css" />
+
+    </head>
+<body ng-controller="utilizationCtrl">
+
+
+<div class="row" style="display:inline-block; width: 100%;">
+
+    <!-- CPU -->
+    <div class="col-md-4">
+        <div pf-utilization-trend-chart config="cpuConfig.cardConfig"
+            chart-data="cpuData" center-label="cpuConfig.centerLabel"
+            donut-config="cpuConfig.donutConfig" sparkline-config="cpuConfig.sparklineConfig"
+            sparkline-chart-height="custChartHeight"
+            show-sparkline-x-axis="custShowXAxis"
+            show-sparkline-y-axis="custShowYAxis">
+        </div>
+    </div>
+
+    <!-- RAM -->
+    <div class="col-md-4">
+        <div pf-utilization-trend-chart config="memoryConfig.cardConfig"
+            chart-data="memoryData" center-label="memoryConfig.centerLabel"
+            donut-config="memoryConfig.donutConfig" sparkline-config="memoryConfig.sparklineConfig"
+            sparkline-chart-height="custChartHeight"
+            show-sparkline-x-axis="custShowXAxis"
+            show-sparkline-y-axis="custShowYAxis">
+        </div>
+    </div>
+
+
+    <!-- NETWORD -->
+    <!--div class="col-md-4">
+        <div pf-utilization-trend-chart config="config"
+                chart-data="data" center-label="centerLabel"
+                donut-config="donutConfig" sparkline-config="config"
+                sparkline-chart-height="custChartHeight"
+                show-sparkline-x-axis="custShowXAxis"
+                show-sparkline-y-axis="custShowYAxis">
+        </div>
+    </div-->
+
+
+</div>
+
+
+
+<!-- Insert this line above script imports  -->
+<script>if (typeof module === "object") {window.module = module; module = undefined;}</script>
+
+<script src="./../../bower_components/jquery/dist/jquery.js"></script>
+<script src="./../../bower_components/angular/angular.js"></script>
+<script src="./../../bower_components/angular-resource/angular-resource.js"></script>
+<script src="./../../bower_components/angular-route/angular-route.js"></script>
+<script src="./../../bower_components/angular-animate/angular-animate.js"></script>
+<script src="./../../bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="./../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="./../../bower_components/lodash/lodash.js"></script>
+<script src="./../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="./../../bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+<script src="./../../bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
+<script src="./../../bower_components/bootstrap-touchspin/src/jquery.bootstrap-touchspin.js"></script>
+<script src="./../../bower_components/d3/d3.js"></script>
+<script src="./../../bower_components/c3/c3.js"></script>
+<script src="./../../bower_components/datatables/media/js/jquery.dataTables.js"></script>
+<script src="./../../bower_components/datatables-colreorder/js/dataTables.colReorder.js"></script>
+<script src="./../../bower_components/datatables-colvis/js/dataTables.colVis.js"></script>
+<script src="./../../bower_components/google-code-prettify/bin/prettify.min.js"></script>
+<script src="./../../bower_components/matchHeight/dist/jquery.matchHeight.js"></script>
+<script src="./../../bower_components/moment/moment.js"></script>
+<script src="./../../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script src="./../../bower_components/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+<script src="./../../bower_components/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+<script src="./../../bower_components/patternfly/dist/js/patternfly.js"></script>
+<script src="./../../bower_components/angular-patternfly/dist/angular-patternfly.js"></script>
+<script src="./../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="./../../bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="./../../bower_components/angular-electron/angular-electron.min.js"></script>
+
+<!-- Insert this line after script imports -->
+<script>if (window.module) module = window.module;</script>
+
+<!-- Angular -->
+<script src="./js/app.js"></script>
+<script src="./js/services/util.js"></script>
+<script src="./js/directives/spark.js"></script>
+<script src="./js/controllers/monitorCtrl.js"></script>
+<script src="./js/controllers/utilization.js"></script>
+
+
+  </body>
+</html>
