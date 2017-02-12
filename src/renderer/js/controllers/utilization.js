@@ -1,13 +1,13 @@
 var app = angular.module('monitorApp');
 
-app.controller('utilizationCtrl', function($log, $scope, $interval, systeminformation , utilService ){
+app.controller('utilizationCtrl', function($log, $scope, $interval, systeminformation , utilService, diskspace ){
 
     /* ALL */
     $scope.custShowXAxis = false;
     $scope.custShowYAxis = false;
     $scope.custChartHeight = 60;
     var nItems = 30;
-    var interval = 5000;
+    var interval = 1000;
 
     /* Memory Initial Config */
     $scope.memoryConfig = {};
@@ -40,7 +40,7 @@ app.controller('utilizationCtrl', function($log, $scope, $interval, systeminform
     };
   
     /* CPU Initial Config */
-    $scope.currentSpeed = 0;
+
     $scope.cpuConfig = {};
     
     $scope.cpuConfig.centerLabel = 'used';
@@ -67,9 +67,22 @@ app.controller('utilizationCtrl', function($log, $scope, $interval, systeminform
         used: 0,
         total: 100,
         xData: ['date'],
-        yData: ['% used']
+        yData: ['% used'],
+        currentSpeed : 0,
+        name: ""
     };
 
+    /* Network */
+    $scope.networkData = {
+        name : undefined,
+        upload: 0,
+        download: 0
+    };
+
+    systeminformation.networkInterfaceDefault(data => {
+        $scope.networkData.name = data;
+        $log.debug("Default network"+ data );
+    });
 
 
 
@@ -124,18 +137,25 @@ app.controller('utilizationCtrl', function($log, $scope, $interval, systeminform
             $log.debug("************ CPU INFO *************");
             $log.debug("Speed: "+ data.speed);
             $log.debug("Brand: "+data.brand);
+            $scope.cpuData.name = data.brand;
             $log.debug("Cores: "+data.cores);
             $log.debug("Manufacturer: "+data.manufacturer);
 
-        })
+        });
 
         systeminformation.cpuCurrentspeed(data => {
 
             $log.debug("Current speed: "+ data.avg);
-            $scope.currentSpeed = data.avg;
+            $scope.cpuData.currentLoad = data.avg;
 
-        })
+        });
 
+        if($scope.networkData.name){
+            systeminformation.networkStats(data => {
+                $scope.networkData.upload = utilService.formatBytesSize(data.tx_sec, 1);
+                $scope.networkData.download = utilService.formatBytesSize(data.rx_sec, 1);
+            });
+        }
 
 
     }, interval);
