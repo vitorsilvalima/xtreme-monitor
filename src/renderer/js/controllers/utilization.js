@@ -7,7 +7,7 @@ app.controller('utilizationCtrl', function($log, $scope, $interval, systeminform
     $scope.custShowYAxis = false;
     $scope.custChartHeight = 60;
     var nItems = 30;
-    var interval = 1000;
+    var interval = 800;
 
     /* Memory Initial Config */
     $scope.memoryConfig = {};
@@ -71,6 +71,43 @@ app.controller('utilizationCtrl', function($log, $scope, $interval, systeminform
         currentSpeed : 0,
         name: ""
     };
+
+    /* Disk Initial Config */
+
+    $scope.diskConfig = {};
+    
+    $scope.diskConfig.centerLabel = 'used';
+
+    $scope.diskConfig.cardConfig = {
+        title: 'Disk',
+        units: 'GB'
+    };
+
+    $scope.diskConfig.donutConfig = {
+        chartId:'diskDonutChart',
+        units: 'GB',
+        thresholds: {'warning':'60','error':'90'}
+    };
+
+    $scope.diskConfig.sparklineConfig = {
+        chartId:'diskSparkChart',
+        tooltipType: 'default',
+        units: 'GB'
+    };
+
+    $scope.diskData = {
+        dataAvailable: true,
+        used: 0,
+        total: 100,
+        xData: ['date'],
+        yData: ['GB used'],
+        currentSpeed : 0,
+        name: ""
+    };
+
+
+
+
 
     /* Network */
     $scope.networkData = {
@@ -156,6 +193,23 @@ app.controller('utilizationCtrl', function($log, $scope, $interval, systeminform
                 $scope.networkData.download = utilService.formatBytesSize(data.rx_sec, 1);
             });
         }
+
+        diskspace.check('/', function(err, total, free, status)
+        {
+            var used = ((total-free)/1000000000).toFixed(1);
+            var total = ((total)/1000000000).toFixed(1);
+
+            $scope.diskData.used = used;
+            $scope.diskData.total = total;
+
+            $scope.diskData.xData.push( new Date());
+            $scope.diskData.yData.push( used );
+
+            if($scope.diskData.xData.length > nItems){
+                $scope.diskData.xData.splice(1,1);
+                $scope.diskData.yData.splice(1,1);
+            }
+        });
 
 
     }, interval);
