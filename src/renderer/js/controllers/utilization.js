@@ -6,6 +6,8 @@ app.controller('utilizationCtrl', function($log, $scope, $interval, systeminform
     $scope.custShowXAxis = false;
     $scope.custShowYAxis = false;
     $scope.custChartHeight = 60;
+    var nItems = 30;
+    var interval = 5000;
 
     /* Memory Initial Config */
     $scope.memoryConfig = {};
@@ -18,11 +20,13 @@ app.controller('utilizationCtrl', function($log, $scope, $interval, systeminform
     };
 
     $scope.memoryConfig.donutConfig = {
+        chartId:'memoryDonutChart',
         units: 'GB',
         thresholds: {'warning':'60','error':'90'}
     };
 
     $scope.memoryConfig.sparklineConfig = {
+        chartId:'memorySparkChart',
         tooltipType: 'default',
         units: 'GB'
     };
@@ -36,32 +40,36 @@ app.controller('utilizationCtrl', function($log, $scope, $interval, systeminform
     };
   
     /* CPU Initial Config */
-    $scope.memoryConfig = {};
+    $scope.currentSpeed = 0;
+    $scope.cpuConfig = {};
     
-    $scope.memoryConfig.centerLabel = 'used';
+    $scope.cpuConfig.centerLabel = 'used';
 
-    $scope.memoryConfig.cardConfig = {
-        title: 'Memory',
-        units: 'GB'
+    $scope.cpuConfig.cardConfig = {
+        title: 'CPU',
+        units: '%'
     };
 
-    $scope.memoryConfig.donutConfig = {
-        units: 'GB',
+    $scope.cpuConfig.donutConfig = {
+        chartId:'cpuDonutChart',
+        units: '%',
         thresholds: {'warning':'60','error':'90'}
     };
 
-    $scope.memoryConfig.sparklineConfig = {
+    $scope.cpuConfig.sparklineConfig = {
+        chartId:'cpuSparkChart',
         tooltipType: 'default',
-        units: 'GB'
+        units: '%'
     };
 
-    $scope.memoryData = {
+    $scope.cpuData = {
         dataAvailable: true,
         used: 0,
-        total: 0,
+        total: 100,
         xData: ['date'],
-        yData: ['GB used']
+        yData: ['% used']
     };
+
 
 
 
@@ -79,18 +87,61 @@ app.controller('utilizationCtrl', function($log, $scope, $interval, systeminform
             $scope.memoryData.yData.push( utilService.formatBytes(data.used, 0) );
 
             
-            if($scope.memoryData.xData.length > 60){
-                $scope.memoryData.xData.slice(1,1);
-                $scope.memoryData.yData.slice(1,1);
+            if($scope.memoryData.xData.length > nItems){
+                $scope.memoryData.xData.splice(1,1);
+                $scope.memoryData.yData.splice(1,1);
             }
        
         });
 
+        systeminformation.currentLoad(data => {
+
+            $log.debug("CPU LOAD used");
+            $log.debug(data);
+
+            var load = parseFloat(data.currentload).toFixed(2);
+            $scope.cpuData.used = load;        
+            $scope.cpuData.xData.push( new Date() );
+            $scope.cpuData.yData.push(load);
+
+            
+            if($scope.cpuData.xData.length > nItems){
+                $scope.cpuData.xData.splice(1,1);
+                $scope.cpuData.yData.splice(1,1);
+            }
+       
+        });
+
+        systeminformation.disksIO(data => {
+
+            console.log(data);
+
+        });
+
+
+        systeminformation.cpu(data => {
+
+            $log.debug("************ CPU INFO *************");
+            $log.debug("Speed: "+ data.speed);
+            $log.debug("Brand: "+data.brand);
+            $log.debug("Cores: "+data.cores);
+            $log.debug("Manufacturer: "+data.manufacturer);
+
+        })
+
+        systeminformation.cpuCurrentspeed(data => {
+
+            $log.debug("Current speed: "+ data.avg);
+            $scope.currentSpeed = data.avg;
+
+        })
 
 
 
+    }, interval);
 
-    }, 1000);
+
+  
 
 });
 

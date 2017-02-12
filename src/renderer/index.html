@@ -16,44 +16,73 @@
 <body ng-controller="utilizationCtrl">
 
 
-<div class="row" style="display:inline-block; width: 100%;">
-
-    <!-- CPU -->
-    <div class="col-md-4">
-        <div pf-utilization-trend-chart config="cpuConfig.cardConfig"
-            chart-data="cpuData" center-label="cpuConfig.centerLabel"
-            donut-config="cpuConfig.donutConfig" sparkline-config="cpuConfig.sparklineConfig"
-            sparkline-chart-height="custChartHeight"
-            show-sparkline-x-axis="custShowXAxis"
-            show-sparkline-y-axis="custShowYAxis">
-        </div>
-    </div>
-
-    <!-- RAM -->
-    <div class="col-md-4">
-        <div pf-utilization-trend-chart config="memoryConfig.cardConfig"
-            chart-data="memoryData" center-label="memoryConfig.centerLabel"
-            donut-config="memoryConfig.donutConfig" sparkline-config="memoryConfig.sparklineConfig"
-            sparkline-chart-height="custChartHeight"
-            show-sparkline-x-axis="custShowXAxis"
-            show-sparkline-y-axis="custShowYAxis">
-        </div>
-    </div>
 
 
-    <!-- NETWORD -->
-    <!--div class="col-md-4">
-        <div pf-utilization-trend-chart config="config"
-                chart-data="data" center-label="centerLabel"
-                donut-config="donutConfig" sparkline-config="config"
+
+<div class="card-pf">
+  <div class="card-pf-heading">
+    <h2 class="card-pf-title">
+      Utilization
+    </h2>
+  </div>
+  <div class="card-pf-body">
+
+    <div class="row" style="display:inline-block; width: 100%;">
+
+        <!-- RAM -->
+        <div class="col-md-6">
+            <div pf-utilization-trend-chart config="memoryConfig.cardConfig"
+                chart-data="memoryData" center-label="memoryConfig.centerLabel"
+                donut-config="memoryConfig.donutConfig" sparkline-config="memoryConfig.sparklineConfig"
                 sparkline-chart-height="custChartHeight"
                 show-sparkline-x-axis="custShowXAxis"
                 show-sparkline-y-axis="custShowYAxis">
+            </div>
         </div>
-    </div-->
+
+        <!-- CPU -->
+        <div class="col-md-6">
+            <div pf-utilization-trend-chart config="cpuConfig.cardConfig"
+                chart-data="cpuData" center-label="cpuConfig.centerLabel"
+                donut-config="cpuConfig.donutConfig" sparkline-config="cpuConfig.sparklineConfig"
+                sparkline-chart-height="custChartHeight"
+                show-sparkline-x-axis="custShowXAxis"
+                show-sparkline-y-axis="custShowYAxis">
+            </div>
+        </div>
+
+    </div>
 
 
+
+    <div class="row" style="display:inline-block; width: 100%;">
+
+        <div class="col-xs-6 col-sm-3 col-md-3">
+
+            <div class="card-pf card-pf-accented card-pf-aggregate-status">
+                <h2 class="card-pf-title">
+                    <span class="fa fa-shield"></span><span class="card-pf-aggregate-status-count"> {{currentSpeed}}</span> Ipsum
+                </h2>
+
+                <div class="card-pf-body">
+                    <p class="card-pf-aggregate-status-notifications">
+                    <span class="card-pf-aggregate-status-notification"><a href="#" class="add" data-toggle="tooltip" data-placement="top" title="Add Ipsum"><span class="pficon pficon-add-circle-o"></span></a></span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+  </div>
 </div>
+
+
+
+
+
+
+
 
 
 
