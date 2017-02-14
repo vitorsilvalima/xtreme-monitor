@@ -1,7 +1,7 @@
 exports.properties = {
 
     //delay
-    ramDelay: 1000,
+    ramDelay: 1500,
     cpuDelay: 1000,
 
 
