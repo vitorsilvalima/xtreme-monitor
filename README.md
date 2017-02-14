@@ -17,7 +17,7 @@
 ## Screenshots
 
 <p align="center">
-    <img src="https://github.com/vitorsilvalima/xtreme-monitor/tree/Screenshots/main.png" width="500">    
+    <img src="https://github.com/vitorsilvalima/xtreme-monitor/blob/master/Screenshots/main.png" width="500">    
 </p>
 
 
