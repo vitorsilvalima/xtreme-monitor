@@ -20,6 +20,7 @@
   "dependencies": {
     "cpu-usage": "^0.1.0",
     "diskspace": "^1.0.3",
+    "jquery-sparkline": "^2.4.0",
     "systeminformation": "^3.16.0"
   }
 }
