@@ -17,6 +17,20 @@
     var cpuData = [];
 
 
+    function initialize(){
+
+        systeminformation.cpu(data =>{
+            $("#cpuInfo").text("CPU - "+data.manufacturer+" "+data.brand);
+            $("#cpuSpeed").text("of " +data.speed+" GHz");
+        })
+
+        systeminformation.mem(data =>{
+            $("#ramTotal").text("of " +formatBytes(data.total,2)+" GB");
+        })
+    
+
+    }initialize();
+
     /* Memory  */
     setInterval(function(){
 
@@ -27,6 +41,7 @@
 
             ramDonutChart.animate(ramUsed/ramTotal);
             updateSparkLineChart(properties.ramSparklineID, (ramUsed/ramTotal)*100);
+            $("#ramUsed").text(formatBytes(ramUsed,2));
             
         })
 
@@ -38,10 +53,17 @@
         
         systeminformation.currentLoad(data =>{
             
-            var cpuLoad = data.currentload;
+            var cpuLoad = parseFloat(data.currentload).toFixed(2);
 
             cpuDonutChart.animate(cpuLoad / 100);
+            $("#cpuPercent").text(cpuLoad);
             updateSparkLineChart(properties.cpuSparklineID, cpuLoad);
+
+        })
+
+        systeminformation.cpuCurrentspeed(data => {
+            
+            $("#currentSpeed").text(data.avg);
 
         })
 
@@ -58,8 +80,8 @@
             height: '50',
             chartRangeMin: 1,
             chartRangeMax: 100,
-            lineColor: '#AAAAAA',
-            fillColor: '#AAAAAA'
+            lineColor: '#00659c',
+            fillColor: '#def3ff'
         };
 
         var data = undefined;
@@ -92,7 +114,7 @@
     function createDonutChart(id, duration){
 
         var bar = new ProgressBar.Circle(id, {
-            color: '#aaa',
+            color: '#0088ce',
             // This has to be the same size as the maximum width to
             // prevent clipping
             strokeWidth: 4,
@@ -102,17 +124,17 @@
             text: {
                 autoStyleContainer: false
             },
-            from: { color: '#aaa', width: 1 },
-            to: { color: '#333', width: 4 },
+            from: { color: '#39a5dc', width: 1 },
+            to: { color: '#00659c', width: 4 },
             // Set default step function for all animate calls
             step: function(state, circle) {
                 if(id == properties.cpuDonutID)
                 {
-                    circle.setText(Math.round(circle.value() * 100) + "%")
+                    circle.setText(Math.round(circle.value() * 100) + " %")
                 }
                 else if(id == properties.ramDonutID)
                 {
-                    circle.setText(formatBytes(ramUsed, 2));
+                    circle.setText(formatBytes(ramUsed, 2)+' GB');
                 }
 
             }

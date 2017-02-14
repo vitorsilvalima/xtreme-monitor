@@ -7,3 +7,12 @@
   position: relative;
 }
 
+.row-space{
+  height: 20px;
+}
+
+.cards-row{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+

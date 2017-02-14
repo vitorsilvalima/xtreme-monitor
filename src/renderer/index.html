@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Hello World!</title>
+        <title>Xtreme Monitor</title>
 
         <!-- PatternFly Styles -->
         <!-- Note: No other CSS files are needed regardless of what other JS packages located in patternfly/components that you decide to pull in -->
@@ -13,16 +13,16 @@
     </head>
 <body class="cards-pf">
     
-<div class="container-fluid container-cards-pf">
-    <div class="row row-cards-pf">
+<div class="container-cards-pf">
+    <div class="row row-cards-pf" >
         <div class="col-xs-12">
 
             <div class="card-pf card-pf-utilization">
                 <div class="card-pf-heading">
-                <p class="card-pf-heading-details">Last 30 days</p>
-                <h2 class="card-pf-title">
+                <!--p class="card-pf-heading-details">Last 30 days</p-->
+                <h1 class="card-pf-title">
                     Utilization
-                </h2>
+                </h1>
                 </div>
 
 
@@ -33,13 +33,13 @@
 
 
                         <div class="col-xs-12 col-sm-4 col-md-4">
-                            <h3 class="card-pf-subtitle">CPU</h3>
+                            <h3 class="card-pf-subtitle" id="cpuInfo">CPU</h3>
 
                             <p class="card-pf-utilization-details">
-                                <span class="card-pf-utilization-card-details-count">50</span>
+                                <span class="card-pf-utilization-card-details-count" id="currentSpeed">0</span>
                                 <span class="card-pf-utilization-card-details-description">
                                     <span class="card-pf-utilization-card-details-line-1">Available</span>
-                                    <span class="card-pf-utilization-card-details-line-2">of 1000 MHz</span>
+                                    <span class="card-pf-utilization-card-details-line-2" id="cpuSpeed">of 0 GHz</span>
                                 </span>
                             </p>
 
@@ -56,10 +56,10 @@
                             <h3 class="card-pf-subtitle">Memory</h3>
 
                             <p class="card-pf-utilization-details">
-                                <span class="card-pf-utilization-card-details-count">256</span>
+                                <span class="card-pf-utilization-card-details-count" id="ramUsed">256</span>
                                 <span class="card-pf-utilization-card-details-description">
                                     <span class="card-pf-utilization-card-details-line-1">Available</span>
-                                    <span class="card-pf-utilization-card-details-line-2">of 432 GB</span>
+                                    <span class="card-pf-utilization-card-details-line-2" id="ramTotal">of 0 GB</span>
                                 </span>
                             </p>
 
@@ -87,11 +87,70 @@
 
 
                     </div>
-                </div>
 
+        <div class="row row-space" >
+        </div>
+
+        <div class="cards-row row">
+
+
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="card-pf card-pf-accented card-pf-aggregate-status">
+                    <h2 class="card-pf-title">
+                        <span class="fa fa-shield"></span><span class="card-pf-aggregate-status-count">0</span> Ipsum
+                    </h2>
+                    <div class="card-pf-body">
+                        <p class="card-pf-aggregate-status-notifications">
+                        <span class="card-pf-aggregate-status-notification"><a href="#" class="add" data-toggle="tooltip" data-placement="top" title="Add Ipsum"><span class="pficon pficon-add-circle-o"></span></a></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="card-pf card-pf-accented card-pf-aggregate-status">
+                <h2 class="card-pf-title">
+                    <span class="fa fa-shield"></span><span class="card-pf-aggregate-status-count">0</span> Ipsum
+                </h2>
+                <div class="card-pf-body">
+                    <p class="card-pf-aggregate-status-notifications">
+                    <span class="card-pf-aggregate-status-notification"><a href="#" class="add" data-toggle="tooltip" data-placement="top" title="Add Ipsum"><span class="pficon pficon-add-circle-o"></span></a></span>
+                    </p>
+                </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="card-pf card-pf-accented card-pf-aggregate-status">
+                <h2 class="card-pf-title">
+                    <span class="fa fa-shield"></span><span class="card-pf-aggregate-status-count">0</span> Ipsum
+                </h2>
+                <div class="card-pf-body">
+                    <p class="card-pf-aggregate-status-notifications">
+                    <span class="card-pf-aggregate-status-notification"><a href="#" class="add" data-toggle="tooltip" data-placement="top" title="Add Ipsum"><span class="pficon pficon-add-circle-o"></span></a></span>
+                    </p>
+                </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+                </div>
             </div>
         </div>
+
+
+
+
     </div><!-- /row -->
+
 </div><!-- /container -->
   
 
